@@ -6,6 +6,6 @@
 int main(){
         printf("PATHSCAN self-test\n");
 
-        addone(5);
+        harness();
 
 }
