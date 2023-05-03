@@ -5,11 +5,11 @@
 
 
 const char *patha = "/sys/class/thermal/thermal_zone0";
-const char *patha = "/sys/class/thermal/thermal_zone0/";
+const char *pathb = "/sys/class/thermal/thermal_zone0/";
 
 
 void pathstep(const char* path){
-
+        step_validate(path);
 
 }
 

@@ -18,7 +18,8 @@ run: $(BIN)
 staticlib: $(STATICLIB)
 
 
-SOURCES:= $(wildcard src/*.c)
+SOURCES:= 	$(wildcard src/*.c)\
+		$(wildcard src/scanner/src/*.c)
 
 OBJECTS:= $(patsubst %.c, build/%.o, $(notdir $(SOURCES)) )
 
@@ -38,4 +39,7 @@ build/selftest.o: selftest.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 build/%.o: src/%.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+build/%.o: src/scanner/src/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
