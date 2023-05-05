@@ -10,13 +10,17 @@
 typedef struct sc_args_t{
         char* path;
         size_t len;
+        void (*message_hook)(void);
 }sc_args_t;
 
 static int step_twopointer( sc_args_t* sc );
 static int step_token( sc_args_t* sc );
 
 
+
+
 int step_validate( const char* path ){
+        sc_args_t sc_args;
         size_t str_len = strlen(path);
 
         
@@ -26,7 +30,7 @@ int step_validate( const char* path ){
         memcpy( pathcopy, path, str_len );
         pathcopy[str_len] = '\0';
 
-        sc_args_t sc_args;
+
         sc_args.path = pathcopy;
         sc_args.len = str_len;
 
@@ -42,11 +46,10 @@ int step_validate( const char* path ){
 
 
 static int step_twopointer( sc_args_t* sc ){
-        printf("%s\n", sc->path);
         int offset = 0;
         // int delim_offset = 0;
 
-        int i = 0;
+        size_t i = 0;
 
         if( sc->path[i] == '/' ){       //Edge case, see explanation below
                 i++;
@@ -64,22 +67,26 @@ static int step_twopointer( sc_args_t* sc ){
                 repeat
         */
 
-        for( i ; i < sc->len; i++){
+        for( /* i */ ; i < sc->len; i++){
 
                 if( sc->path[i] == '/' ){
                         
                         sc->path[i] = '\0';
                         sc->path[offset] = '/';
 
-                        printf("%s\n", sc->path);
+
+
                         offset = i;
                 } 
-
         }
+
+        return 1;
 
 }
 
+/* I'm keeping this around, this prints ONE token at a time */
 
+/*
 static int csssstep_twopointer( sc_args_t* sc ){
         printf("%s\n", sc->path);
         int offset = 0;
@@ -103,7 +110,9 @@ static int csssstep_twopointer( sc_args_t* sc ){
         }
 
 }
+*/
 
+/* TODO -> finish this */
 static int step_token( sc_args_t* sc ){
         char* token = NULL;
         char delim[2] = "/";
@@ -116,4 +125,5 @@ static int step_token( sc_args_t* sc ){
                 token = strtok( NULL, delim );
         }
 
+        return -1;
 }

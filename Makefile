@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -Wall -Wextra
+CFLAGS := -Wall -Wextra -Wno-unused-function
 
 
 
@@ -19,7 +19,8 @@ staticlib: $(STATICLIB)
 
 
 SOURCES:= 	$(wildcard src/*.c)\
-		$(wildcard src/scanner/src/*.c)
+		$(wildcard src/scanner/src/*.c)\
+		$(wildcard src/parsing/src/*.c)
 
 OBJECTS:= $(patsubst %.c, build/%.o, $(notdir $(SOURCES)) )
 
@@ -42,4 +43,7 @@ build/%.o: src/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 build/%.o: src/scanner/src/%.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+build/%.o: src/parsing/src/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
