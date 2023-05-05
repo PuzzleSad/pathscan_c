@@ -95,67 +95,21 @@ access_str_t access_to_str( access_t* access ){
         size_t str_len = sizeof(access_str_t) -1;       //-1 for '\0'
         access_str.str[str_len] = '\0';
         
-
-        {
-                if( access->group.R ){
-                        access_str.str[3] = 'r';
-                }else{
-                        access_str.str[3] = '-';
-                }
-
-                if( access->group.W ){
-                        access_str.str[4] = 'w';
-                }else{
-                        access_str.str[4] = '-';
-                }
-
-                if( access->group.X ){
-                        access_str.str[5] = 'x';
-                }else{
-                        access_str.str[5] = '-';
-                }
-        }
+        //I sadly have no better solution at the moment
         
-        {
-                if( access->owner.R ){
-                        access_str.str[0] = 'r';
-                }else{
-                        access_str.str[0] = '-';
-                }
-
-                if( access->owner.W ){
-                        access_str.str[1] = 'w';
-                }else{
-                        access_str.str[1] = '-';
-                }
-
-                if( access->owner.X ){
-                        access_str.str[2] = 'x';
-                }else{
-                        access_str.str[2] = '-';
-                }
-        }
-
-        {
-                if( access->other.R ){
-                        access_str.str[6] = 'r';
-                }else{
-                        access_str.str[6] = '-';
-                }
-
-                if( access->other.W ){
-                        access_str.str[7] = 'w';
-                }else{
-                        access_str.str[7] = '-';
-                }
-
-                if( access->other.X ){    
-                        access_str.str[8] = 'x';
-                }else{
-                        access_str.str[8] = '-';
-                }
-        }
+        if( access->owner.R ){ access_str.str[0] = 'r'; }else{ access_str.str[0] = '-'; }
+        if( access->owner.W ){ access_str.str[1] = 'w'; }else{ access_str.str[1] = '-'; }
+        if( access->owner.X ){ access_str.str[2] = 'x'; }else{ access_str.str[2] = '-'; }
         
+        if( access->group.R ){ access_str.str[3] = 'r'; }else{ access_str.str[3] = '-'; }
+        if( access->group.W ){ access_str.str[4] = 'w'; }else{ access_str.str[4] = '-'; }
+        if( access->group.X ){ access_str.str[5] = 'x'; }else{ access_str.str[5] = '-'; }
+
+        if( access->other.R ){ access_str.str[6] = 'r'; }else{ access_str.str[6] = '-'; }
+        if( access->other.W ){ access_str.str[7] = 'w'; }else{ access_str.str[7] = '-'; }
+        if( access->other.X ){ access_str.str[8] = 'x'; }else{ access_str.str[8] = '-'; }
+        
+
         return access_str;
 
 }
