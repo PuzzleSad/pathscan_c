@@ -3,6 +3,14 @@
 
 #include <stdint.h>
 
+#define F_BLK   1       /**/
+#define F_CHR   2       /**/
+#define F_DIR   4       /**/
+#define F_FIFO  8       /**/
+#define F_REG   16      /**/
+#define F_LNK   32      /**/
+#define F_SOCK  64      /**/
+
 typedef struct perms_t{
         uint8_t R;
         uint8_t W;
@@ -15,6 +23,7 @@ typedef struct access_t{
         perms_t other;
 
         int file_type;
+        uint32_t st_mode;
 }access_t;
 
 typedef struct access_str_t{
